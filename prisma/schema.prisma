@@ -1,0 +1,45 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id             String     @id @default(uuid())
+  email          String     @unique
+  password       String?
+  image          String?
+  description    String
+  rooms          Room[]
+}
+
+model Room {
+  id                    Int         @id @default(autoincrement())
+  title                 String
+  images                String[]
+  address               String
+  lat                   String      // 위도
+  lng                   String      // 경도
+  category              String
+  description           String
+  price                 Int
+  bedroomDescription    String?
+  freeCancel            Boolean     @default(false)
+  selfCheckIn           Boolean     @default(false)
+  officeSpace           Boolean     @default(false)
+  hasMountainView       Boolean     @default(false)
+  hasShampoo            Boolean     @default(false)
+  hasFreeLaundry        Boolean     @default(false)
+  hasAirCondition       Boolean     @default(false)
+  hasFreeWifi           Boolean     @default(false)
+  hasBarbecue           Boolean     @default(false)
+  hasFreeParking        Boolean     @default(false)
+  userId                String
+  user                  User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([userId])
+}
