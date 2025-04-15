@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { PrismaClient } from '@prisma/client';
 
 const Home = async () => {

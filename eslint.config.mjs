@@ -16,15 +16,16 @@ const compat = new FlatCompat({
 export default tseslint.config(
   eslint.configs.recommended,
   tseslint.configs.recommended,
+  ...compat.config({
+    extends: ['next', 'next/core-web-vitals', 'next/typescript', 'prettier'],
+  }),
   {
     plugins: {
       'unused-imports': unusedImports,
     },
     rules: {
+      '@next/next/no-img-element': 'off',
       ...reactHooks.configs.recommended.rules,
     },
   },
-  ...compat.config({
-    extends: ['next', 'next/core-web-vitals', 'next/typescript', 'prettier'],
-  }),
 );
