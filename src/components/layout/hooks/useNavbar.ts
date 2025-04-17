@@ -2,7 +2,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export type DetailFilterType = 'location' | 'checkIn' | 'checkOut' | 'guest';
-type FilterValueType = {
+export type FilterValueType = {
   location: string;
   checkIn: string;
   checkOut: string;
@@ -41,7 +41,25 @@ const useNavbar = () => {
 
   const onClickDetailFilter = (keyword: DetailFilterType) => {
     setDetailFilter((prevState) => (prevState != keyword ? keyword : null));
-    console.log(detailFilter);
+  };
+
+  const onClickLocationFilter = (location: string) => {
+    setFilterValue((prevState) => ({ ...prevState, location }));
+    setDetailFilter('checkIn');
+  };
+
+  const onChangeCheckInFilter = (checkIn: string) => {
+    setFilterValue((prevState) => ({ ...prevState, checkIn }));
+    setDetailFilter('checkOut');
+  };
+
+  const onChangeCheckOutFilter = (checkOut: string) => {
+    setFilterValue((prevState) => ({ ...prevState, checkOut }));
+    setDetailFilter('guest');
+  };
+
+  const onClickGuestFilter = (guest: number) => {
+    setFilterValue((prevState) => ({ ...prevState, guest }));
   };
 
   return {
@@ -52,7 +70,11 @@ const useNavbar = () => {
     onClickShowFilter,
     onClickSearchButton,
     onClickDetailFilter,
+    onClickLocationFilter,
+    onChangeCheckInFilter,
+    onChangeCheckOutFilter,
     onClickShowMenu,
+    onClickGuestFilter,
     onClickHrefUrl,
   };
 };

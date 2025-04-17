@@ -25,6 +25,7 @@ export default tseslint.config(
     },
     rules: {
       '@next/next/no-img-element': 'off',
+      'react/display-name': 'off',
       ...reactHooks.configs.recommended.rules,
     },
   },

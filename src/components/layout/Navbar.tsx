@@ -1,12 +1,21 @@
 'use client';
 
+import React from 'react';
 import { MdModeOfTravel } from 'react-icons/md';
 import { RxDividerVertical } from 'react-icons/rx';
-import { AiOutlineSearch, AiOutlineMenu, AiOutlineUser } from 'react-icons/ai';
-import useNavbar from './hooks/useNavbar';
+import {
+  AiOutlineSearch,
+  AiOutlineMenu,
+  AiOutlineUser,
+  AiOutlinePlusCircle,
+  AiOutlineMinusCircle,
+} from 'react-icons/ai';
+import useNavbar, { type FilterValueType } from './hooks/useNavbar';
 import { navMenus } from './constants/navMenus';
 import clsx from 'clsx';
 import { navFilterList } from './constants/navFilterList';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
 
 const Navbar = () => {
   const {
@@ -17,7 +26,11 @@ const Navbar = () => {
     onClickShowFilter,
     onClickShowMenu,
     onClickSearchButton,
+    onClickLocationFilter,
     onClickDetailFilter,
+    onChangeCheckOutFilter,
+    onChangeCheckInFilter,
+    onClickGuestFilter,
     onClickHrefUrl,
   } = useNavbar();
 
@@ -67,11 +80,31 @@ const Navbar = () => {
                 >
                   {navFilter.filterText}
                   <div className="text-gray-500 text-xs">
-                    {filterValue?.[navFilter.filterType] || navFilter.placeholder}
+                    {navFilter.filterType == 'guest'
+                      ? filterValue?.[navFilter.filterType] + ' 명'
+                      : filterValue?.[navFilter.filterType] || navFilter.placeholder}
                   </div>
                 </button>
               ))}
             </div>
+            {detailFilter == 'location' && (
+              <Navbar.LocationFilter
+                filterValue={filterValue}
+                onClickLocationFilter={onClickLocationFilter}
+              />
+            )}
+            {detailFilter == 'checkIn' && (
+              <Navbar.CheckInFilter filterValue={filterValue} onChangeCheckInFilter={onChangeCheckInFilter} />
+            )}
+            {detailFilter == 'checkOut' && (
+              <Navbar.CheckOutFilter
+                filterValue={filterValue}
+                onChangeCheckOutFilter={onChangeCheckOutFilter}
+              />
+            )}
+            {detailFilter == 'guest' && (
+              <Navbar.GuestFilter filterValue={filterValue} onClickGuestFilter={onClickGuestFilter} />
+            )}
             <button
               type="button"
               className="bg-rose-600 text-white rounded-full h-10 mx-3 sm:w-24 my-auto flex justify-center gap-1 px-3 py-2 hover:shadow hover:bg-rose-700 cursor-pointer"
@@ -134,4 +167,114 @@ const Navbar = () => {
 
 export default Navbar;
 
-// 19 줄 sm:w-[280px]로 인해 640px 이하면 넓이가 넓어짐
+// 119 줄 sm:w-[280px]로 인해 640px 이하면 넓이가 넓어짐
+
+type LocationFilterProps = {
+  filterValue: FilterValueType;
+  onClickLocationFilter: (location: string) => void;
+};
+
+Navbar.LocationFilter = ({ filterValue, onClickLocationFilter }: LocationFilterProps) => {
+  return (
+    <div className="absolute top-80 sm:top-[80px] w-full border border-gray-200 px-8 py-10 flex flex-col bg-white sm:max-w-3xl rounded-xl left-0">
+      <div className="text-sm font-semibold">지역으로 검색하기</div>
+      <div className="flex flex-wrap gap-4 mt-4">
+        {['서울', '부산', '대구', '인천', '광주', '대전', '울산'].map((region) => (
+          <button
+            key={region}
+            type="button"
+            onClick={() => onClickLocationFilter(region)}
+            className={clsx(
+              `border rounded-lg px-5 py-2.5 hover:bg-gray-200 focus:bg-rose-500`,
+              filterValue.location == region && 'bg-rose-600 text-white',
+            )}
+          >
+            {region}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+type CheckInFilterProps = {
+  filterValue: FilterValueType;
+  onChangeCheckInFilter: (checkIn: string) => void;
+};
+
+Navbar.CheckInFilter = ({ filterValue, onChangeCheckInFilter }: CheckInFilterProps) => {
+  return (
+    <div className="absolute top-80 sm:top-[80px] w-full border border-gray-200 px-8 py-10 flex flex-col bg-white sm:max-w-3xl rounded-xl left-0">
+      <div className="text-sm font-semibold">체크인 날짜 설정하기</div>
+      <input
+        type="date"
+        className="mt-4 p-3 border border-gray-200 px-y px-2.5 rounded-lg"
+        defaultValue={filterValue.checkIn}
+        min={dayjs().format('YYYY-MM-DD')}
+        onChange={(e) => onChangeCheckInFilter(e.target.value)}
+      />
+    </div>
+  );
+};
+
+type CheckOutFilterProps = {
+  filterValue: FilterValueType;
+  onChangeCheckOutFilter: (checkOut: string) => void;
+};
+
+Navbar.CheckOutFilter = ({ filterValue, onChangeCheckOutFilter }: CheckOutFilterProps) => {
+  return (
+    <div className="absolute top-80 sm:top-[80px] w-full border border-gray-200 px-8 py-10 flex flex-col bg-white sm:max-w-3xl rounded-xl left-0">
+      <div className="text-sm font-semibold">체크아웃 날짜 설정하기</div>
+      <input
+        type="date"
+        className="mt-4 p-3 border border-gray-200 px-y px-2.5 rounded-lg"
+        defaultValue={filterValue.checkOut}
+        min={dayjs(filterValue.checkIn).add(1, 'day').format('YYYY-MM-DD')}
+        onChange={(e) => onChangeCheckOutFilter(e.target.value)}
+      />
+    </div>
+  );
+};
+
+type GuestFilterProps = {
+  filterValue: FilterValueType;
+  onClickGuestFilter: (guest: number) => void;
+};
+
+Navbar.GuestFilter = ({ filterValue, onClickGuestFilter }: GuestFilterProps) => {
+  return (
+    <div className="absolute top-80 sm:top-[80px] w-full border border-gray-200 px-8 py-10 flex flex-col bg-white sm:max-w-3xl rounded-xl left-0">
+      <div className="text-sm font-semibold">게스트 수 추가하기</div>
+      <div className="mt-4 border border-gray-200 px-4 py-2 rounded-lg flex justify-between items-center">
+        <div>
+          <div className="font-semibold text-sm">게스트 수 추가하기</div>
+          <div className="text-gray-500 text-xs">숙박 인원을 입력해주세요</div>
+        </div>
+        <div className="flex gap-4 items-center justify-center">
+          <button
+            type="button"
+            className="rounded-full w-8 h-8 disabled:border-gray-200 hover:border-black"
+            onClick={() => onClickGuestFilter(filterValue.guest - 1)}
+            disabled={filterValue.guest <= 0}
+          >
+            <AiOutlineMinusCircle
+              className={clsx('m-auto w-5 h-5 cursor-pointer', filterValue.guest <= 0 && 'text-gray-200')}
+            />
+          </button>
+          <div className="w-3 text-center">{filterValue.guest}</div>
+          <button
+            type="button"
+            className="rounded-full w-8 h-8 disabled:border-gray-200 hover:border-black"
+            onClick={() => onClickGuestFilter(filterValue.guest + 1)}
+            disabled={filterValue.guest >= 20}
+          >
+            <AiOutlinePlusCircle
+              className={clsx('m-auto w-5 h-5 cursor-pointer', filterValue.guest >= 20 && 'text-gray-200')}
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
