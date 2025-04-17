@@ -17,6 +17,8 @@ import { navFilterList } from './constants/navFilterList';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 
+import Calendar from 'react-calendar';
+
 const Navbar = () => {
   const {
     isShowMenu,
@@ -33,6 +35,9 @@ const Navbar = () => {
     onClickGuestFilter,
     onClickHrefUrl,
   } = useNavbar();
+
+  // console.log('1', typeof new Date());
+  // console.log('2', typeof dayjs().format('YYYY-MM-DD'));
 
   return (
     <nav
@@ -66,7 +71,7 @@ const Navbar = () => {
               필터 닫기
             </button>
           </div>
-          <div className="w-[90%] sm:max-w-3xl flex flex-col border border-gray-200 rounded-lg py-4 sm:flex-row sm:py-2 sm:rounded-full shadow-sm bg-white hover:shadow-lg cursor-pointer justify-between fixed top-20 inset-x-0 mx-auto">
+          <div className="w-[90%] sm:max-w-3xl p-2 sm:p-0 flex flex-col border border-gray-200 rounded-lg py-4 sm:flex-row sm:py-2 sm:rounded-full shadow-sm bg-white hover:shadow-lg cursor-pointer justify-between fixed top-20 inset-x-0 mx-auto">
             <div className="grid grid-cols-1 sm:grid-cols-4 w-full relative sm:pl-2">
               {navFilterList.map((navFilter) => (
                 <button
@@ -107,7 +112,7 @@ const Navbar = () => {
             )}
             <button
               type="button"
-              className="bg-rose-600 text-white rounded-full h-10 mx-3 sm:w-24 my-auto flex justify-center gap-1 px-3 py-2 hover:shadow hover:bg-rose-700 cursor-pointer"
+              className="bg-rose-600 text-white rounded-full h-10 mx-3 sm:w-24 my-auto flex mt-4 sm:mt-auto justify-center gap-1 px-3 py-2 hover:shadow hover:bg-rose-700 cursor-pointer"
               onClick={onClickSearchButton}
             >
               <AiOutlineSearch className="font-semibold my-auto text-xl" />
@@ -135,7 +140,7 @@ const Navbar = () => {
         </div>
       )}
 
-      <div className="grow basis-0 hidden sm:flex gap-4 justify-end align-middle relative">
+      <div className="grow basis-0 hidden md:flex gap-4 justify-end align-middle relative">
         <button className="font-semibold text-sm my-auto px-4 py-3 rounded-full hover:bg-gray-50">
           당신의 공간을 등록해주세요
         </button>
@@ -206,12 +211,12 @@ Navbar.CheckInFilter = ({ filterValue, onChangeCheckInFilter }: CheckInFilterPro
   return (
     <div className="absolute top-80 sm:top-[80px] w-full border border-gray-200 px-8 py-10 flex flex-col bg-white sm:max-w-3xl rounded-xl left-0">
       <div className="text-sm font-semibold">체크인 날짜 설정하기</div>
-      <input
-        type="date"
-        className="mt-4 p-3 border border-gray-200 px-y px-2.5 rounded-lg"
-        defaultValue={filterValue.checkIn}
-        min={dayjs().format('YYYY-MM-DD')}
-        onChange={(e) => onChangeCheckInFilter(e.target.value)}
+      <Calendar
+        className="mt-8 mx-auto"
+        defaultValue={filterValue.checkIn ? new Date(filterValue.checkIn) : null}
+        minDate={new Date()}
+        onChange={(e) => onChangeCheckInFilter(dayjs(e as Date).format('YYYY-MM-DD'))}
+        formatDay={(locale, date) => dayjs(date).format('DD')} // 일 빼기
       />
     </div>
   );
@@ -226,12 +231,16 @@ Navbar.CheckOutFilter = ({ filterValue, onChangeCheckOutFilter }: CheckOutFilter
   return (
     <div className="absolute top-80 sm:top-[80px] w-full border border-gray-200 px-8 py-10 flex flex-col bg-white sm:max-w-3xl rounded-xl left-0">
       <div className="text-sm font-semibold">체크아웃 날짜 설정하기</div>
-      <input
-        type="date"
-        className="mt-4 p-3 border border-gray-200 px-y px-2.5 rounded-lg"
-        defaultValue={filterValue.checkOut}
-        min={dayjs(filterValue.checkIn).add(1, 'day').format('YYYY-MM-DD')}
-        onChange={(e) => onChangeCheckOutFilter(e.target.value)}
+      <Calendar
+        className="mt-8 mx-auto"
+        defaultValue={filterValue.checkOut ? new Date(filterValue.checkOut) : null}
+        minDate={
+          filterValue.checkIn
+            ? new Date(dayjs(filterValue.checkIn).add(1, 'day').format('YYYY-MM-DD'))
+            : new Date()
+        }
+        onChange={(e) => onChangeCheckOutFilter(dayjs(e as Date).format('YYYY-MM-DD'))}
+        formatDay={(locale, date) => dayjs(date).format('DD')} // 일 빼기
       />
     </div>
   );
