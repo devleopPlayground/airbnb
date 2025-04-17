@@ -1,4 +1,4 @@
-import type { DetailFilterType } from '../hooks/useNavbar';
+import type { DetailFilterType } from '@/atoms/filterAtoms';
 
 type navFilterListType = {
   filterType: DetailFilterType;
