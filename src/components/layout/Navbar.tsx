@@ -26,7 +26,7 @@ const Navbar = () => {
   return (
     <nav
       className={clsx(
-        `border-b-gray-200 w-full shadow-sm p-4 sm:px-10 flex justify-between items-center align-middle fixed top-0 bg-white`,
+        `h-20 z-10 border-b-gray-200 w-full shadow-sm p-4 sm:px-10 flex justify-between items-center align-middle fixed top-0 bg-white`,
         isShowFilter && 'h-44 items-start',
       )}
     >

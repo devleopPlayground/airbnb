@@ -6,6 +6,7 @@ export type FilterValueType = {
   checkIn: string;
   checkOut: string;
   guest: number;
+  category: string;
 };
 
 const detailFilterAtom = atom<DetailFilterType | null>(null);
@@ -15,6 +16,7 @@ const filterValueAtom = atom<FilterValueType>({
   checkIn: '',
   checkOut: '',
   guest: 0,
+  category: '',
 });
 
 export { detailFilterAtom, filterValueAtom };
