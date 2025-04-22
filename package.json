@@ -20,6 +20,9 @@
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.74.4",
+    "@tanstack/react-query-devtools": "5.0.0-alpha.53",
+    "axios": "^1.8.4",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.13",
     "jotai": "^2.12.3",

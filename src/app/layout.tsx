@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { pretendard } from './fonts';
 import LayoutProvider from '@/providers/LayoutProvider';
+import TanstackQueryProvider from '@/providers/TanstackQueryProvider';
 
 export const metadata: Metadata = {
   title: 'Fastcampus Nextbnb로 여행하기',
@@ -16,7 +17,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={pretendard.variable}>
-        <LayoutProvider>{children}</LayoutProvider>
+        <TanstackQueryProvider>
+          <LayoutProvider>{children}</LayoutProvider>
+        </TanstackQueryProvider>
       </body>
     </html>
   );

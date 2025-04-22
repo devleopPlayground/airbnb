@@ -6,3 +6,9 @@ export type RoomType = {
   price: number;
   category: string;
 };
+
+export type FaqType = {
+  id: number;
+  title: string;
+  description: string;
+};
