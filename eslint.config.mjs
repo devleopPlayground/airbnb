@@ -24,6 +24,8 @@ export default tseslint.config(
       'unused-imports': unusedImports,
     },
     rules: {
+      'no-unused-expressions': 'off',
+      '@typescript-eslint/no-unused-expressions': 'error',
       '@next/next/no-img-element': 'off',
       'react/display-name': 'off',
       ...reactHooks.configs.recommended.rules,

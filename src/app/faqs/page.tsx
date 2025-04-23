@@ -1,6 +1,5 @@
 import { getFaqs } from '@/apis/faqs';
 import type { FaqType } from '@/interface';
-import React from 'react';
 
 export const dynamic = 'force-static';
 

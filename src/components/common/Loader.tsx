@@ -13,4 +13,20 @@ const Loader = ({ ...props }: LoaderProps) => {
   );
 };
 
-export default Loader;
+const LoaderGrid = ({ ...props }: LoaderProps) => {
+  return (
+    <>
+      {[...Array(12)].map((_, idx) => (
+        <div
+          key={idx}
+          className={clsx(
+            'rounded-md w-full h-72 md:h-64 bg-gray-100 animate-pulse object-fit z-0',
+            props?.className,
+          )}
+        />
+      ))}
+    </>
+  );
+};
+
+export { Loader, LoaderGrid };

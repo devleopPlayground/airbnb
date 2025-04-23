@@ -2,12 +2,31 @@
 
 import GridLayout from './GridLayout';
 import RoomItem from '.';
-import useRoom from './hooks/useRoom';
+import type { RoomType } from '@/interface';
+import React from 'react';
+import { Loader, LoaderGrid } from '@/components/common/Loader';
+import useRoomList from './hooks/useRoomList';
 
 const RoomList = () => {
-  const { data } = useRoom();
+  const { ref, rooms, isFetching, hasNextPage, isFetchingNextPage, isLoading } = useRoomList();
 
-  return <GridLayout>{data?.map((room) => <RoomItem key={room.id} {...room} />)}</GridLayout>;
+  return (
+    <>
+      <GridLayout>
+        {isLoading || isFetching ? (
+          <LoaderGrid />
+        ) : (
+          rooms?.pages?.map((page, idx) => (
+            <React.Fragment key={idx}>
+              {page?.data?.map((room: RoomType) => <RoomItem key={room.id} {...room} />)}
+            </React.Fragment>
+          ))
+        )}
+      </GridLayout>
+      {(isFetching || hasNextPage || isFetchingNextPage) && <Loader />}
+      <div className="w-full touch-none h-10 mb-10" ref={ref} />
+    </>
+  );
 };
 
 export default RoomList;

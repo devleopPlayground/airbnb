@@ -6,9 +6,10 @@ import { getRooms } from '@/apis/rooms';
 const Home = async () => {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery({
+  await queryClient.prefetchInfiniteQuery({
     queryKey: ['room'],
-    queryFn: () => getRooms(),
+    queryFn: getRooms,
+    initialPageParam: 0,
   });
 
   const dehydratedState = dehydrate(queryClient);
