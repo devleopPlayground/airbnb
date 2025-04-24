@@ -16,12 +16,17 @@ const useRoomList = () => {
     fetchNextPage,
     hasNextPage,
     isLoading,
+    isError,
   } = useInfiniteQuery({
     queryKey: ['rooms'],
     queryFn: getRooms,
     initialPageParam: 1,
     getNextPageParam: (lastPage) => (lastPage?.data?.length > 0 ? lastPage.page + 1 : undefined),
   });
+
+  if (isError) {
+    throw new Error('Room API Fetching Error.');
+  }
 
   useEffect(() => {
     if (isPageEnd && hasNextPage) {

@@ -1,7 +1,8 @@
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
-import Category from './(components)/category';
-import RoomList from './(components)/room/RoomList';
+
 import { getRooms } from '@/apis/rooms';
+import Category from '../(components)/category';
+import RoomList from '../(components)/room/RoomList';
 
 const Home = async () => {
   const queryClient = new QueryClient();
