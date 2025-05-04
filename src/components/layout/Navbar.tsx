@@ -9,6 +9,7 @@ import { navMenus } from './constants/navMenus';
 import clsx from 'clsx';
 import { navFilterList } from './constants/navFilterList';
 import { SearchFilter } from './components/Navbar/Filter';
+import Link from 'next/link';
 
 const Navbar = () => {
   const {
@@ -30,10 +31,13 @@ const Navbar = () => {
         isShowFilter && 'h-44 items-start',
       )}
     >
-      <div className="grow basis-0 hidden font-semibold text-lg sm:text-xl text-rose-500 cursor-pointer sm:flex sm:gap-2">
+      <Link
+        href="/"
+        className="grow basis-0 hidden font-semibold text-lg sm:text-xl text-rose-500 cursor-pointer sm:flex sm:gap-2"
+      >
         <MdModeOfTravel className="text-4xl" />
         <span className="my-auto">NextBnb</span>
-      </div>
+      </Link>
 
       {isShowFilter ? (
         <div className="sm:w-[340px] w-full relative">

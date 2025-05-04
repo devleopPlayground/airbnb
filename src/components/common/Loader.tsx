@@ -3,6 +3,31 @@ import type { HTMLAttributes } from 'react';
 
 type LoaderProps = HTMLAttributes<HTMLDivElement>;
 
+type SpinnerProps = {
+  size?: 'sm' | 'md' | 'lg';
+};
+
+const Spinner = ({ size = 'md' }: SpinnerProps) => {
+  const sizeStyle = () => {
+    switch (size) {
+      case 'sm':
+        return 'size-10';
+      case 'md':
+        return 'size-12';
+      case 'lg':
+        return 'size-[52px]';
+    }
+  };
+
+  console.log(sizeStyle);
+
+  return (
+    <span
+      className={`${sizeStyle()} border-4 border-white border-b-red-500 rounded-full animate-spin`}
+    ></span>
+  );
+};
+
 const Loader = ({ ...props }: LoaderProps) => {
   return (
     <div className={clsx('flex gap-4 justify-center', props?.className)} {...props}>
@@ -29,4 +54,4 @@ const LoaderGrid = ({ ...props }: LoaderProps) => {
   );
 };
 
-export { Loader, LoaderGrid };
+export { Loader, LoaderGrid, Spinner };

@@ -6,9 +6,10 @@ import type { RoomType } from '@/interface';
 import React from 'react';
 import { Loader, LoaderGrid } from '@/components/common/Loader';
 import useRoomList from './hooks/useRoomList';
+import MapButton from '../map/MapButton';
 
 const RoomList = () => {
-  const { ref, rooms, isFetching, hasNextPage, isFetchingNextPage, isLoading } = useRoomList();
+  const { ref, rooms, isFetching, hasNextPage, isFetchingNextPage, isLoading, onNavigateMap } = useRoomList();
 
   return (
     <>
@@ -23,6 +24,7 @@ const RoomList = () => {
           ))
         )}
       </GridLayout>
+      <MapButton onClick={onNavigateMap} />
       {(isFetching || hasNextPage || isFetchingNextPage) && <Loader />}
       <div className="w-full touch-none h-10 mb-10" ref={ref} />
     </>

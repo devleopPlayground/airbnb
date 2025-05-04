@@ -8,7 +8,7 @@ const LayoutProvider = ({ children }: LayoutProviderProps) => {
   return (
     <>
       <Navbar />
-      <div className="mt-20 p-10 min-h-[80dvh]">{children}</div>
+      {children}
       <Footer />
     </>
   );

@@ -1,13 +1,5 @@
+import type { DetailFilterType, FilterValueType } from '@/interface';
 import { atom } from 'jotai';
-
-export type DetailFilterType = 'location' | 'checkIn' | 'checkOut' | 'guest';
-export type FilterValueType = {
-  location: string;
-  checkIn: string;
-  checkOut: string;
-  guest: number;
-  category: string;
-};
 
 const detailFilterAtom = atom<DetailFilterType | null>(null);
 

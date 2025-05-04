@@ -1,11 +1,18 @@
 import { getRooms } from '@/apis/rooms';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
+
 import { useEffect, useRef } from 'react';
 
 const useRoomList = () => {
   const ref = useRef<HTMLDivElement | null>(null);
   const pageRef = useIntersectionObserver(ref as React.RefObject<Element>, {});
+  const router = useRouter();
+
+  const onNavigateMap = () => {
+    router.push('/map');
+  };
 
   const isPageEnd = !!pageRef?.isIntersecting;
 
@@ -17,7 +24,7 @@ const useRoomList = () => {
     hasNextPage,
     isLoading,
     isError,
-  } = useInfiniteQuery({
+  } = useSuspenseInfiniteQuery({
     queryKey: ['rooms'],
     queryFn: getRooms,
     initialPageParam: 1,
@@ -36,7 +43,7 @@ const useRoomList = () => {
     }
   }, [isPageEnd, hasNextPage, fetchNextPage]);
 
-  return { rooms, isFetching, hasNextPage, isFetchingNextPage, isLoading, ref };
+  return { rooms, isFetching, hasNextPage, isFetchingNextPage, isLoading, ref, onNavigateMap };
 };
 
 export default useRoomList;

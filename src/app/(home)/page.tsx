@@ -3,8 +3,10 @@ import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query
 import { getRooms } from '@/apis/rooms';
 import Category from '../(components)/category';
 import RoomList from '../(components)/room/RoomList';
+import { Suspense } from 'react';
+import { LoaderGrid } from '@/components/common/Loader';
 
-const Home = async () => {
+const HomePage = async () => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchInfiniteQuery({
@@ -19,10 +21,12 @@ const Home = async () => {
     <>
       <Category />
       <HydrationBoundary state={dehydratedState}>
-        <RoomList />
+        <Suspense fallback={<LoaderGrid />}>
+          <RoomList />
+        </Suspense>
       </HydrationBoundary>
     </>
   );
 };
 
-export default Home;
+export default HomePage;

@@ -1,9 +1,19 @@
+import { IMAGE_BLUR } from '@/constants/imageBlur';
 import type { RoomType } from '@/interface';
+import Image from 'next/image';
 
 const RoomItem = ({ id, images, title, category, address, price }: RoomType) => {
   return (
     <div key={id}>
-      <img src={images[0]} alt={title} className="rounded-md w-full h-auto object-fit" />
+      <Image
+        width={200}
+        height={200}
+        src={images[0]}
+        alt={title}
+        placeholder="blur"
+        blurDataURL={IMAGE_BLUR}
+        className="rounded-md w-full h-auto object-fit"
+      />
       <div className="mt-2 font-semibold text-sm">{title}</div>
       <span className="text-xs px-2 py-1 rounded-full bg-black text-white">{category}</span>
       <div className="mt-1 text-gray-400 text-sm">{address}</div>
@@ -15,4 +25,3 @@ const RoomItem = ({ id, images, title, category, address, price }: RoomType) => 
 };
 
 export default RoomItem;
-

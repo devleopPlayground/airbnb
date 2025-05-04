@@ -174,5 +174,9 @@
   background-color: #e6e6e6;
 }
 
+.custom_overlay {
+  @apply bg-white rounded-full px-2 py-1 text-xs font-semibold border border-gray-300 shadow hover:shadow-lg hover:font-bold;
+}
+
 @import 'tailwindcss';
 @config '../../tailwind.config.ts';
