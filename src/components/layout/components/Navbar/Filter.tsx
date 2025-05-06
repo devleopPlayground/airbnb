@@ -1,12 +1,12 @@
-import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
-
-import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 
-import Calendar from 'react-calendar';
 import clsx from 'clsx';
-import useNavFilter from './hooks/useNavFilter';
+import dayjs from 'dayjs';
+import Calendar from 'react-calendar';
+import { AiOutlineMinusCircle,AiOutlinePlusCircle } from 'react-icons/ai';
+
 import FilterLayout from './FilterLayout';
+import useNavFilter from './hooks/useNavFilter';
 
 const LocationFilter = () => {
   const { filterValue, detailFilter, onClickLocationFilter } = useNavFilter();
@@ -117,4 +117,4 @@ const SearchFilter = () => {
   );
 };
 
-export { LocationFilter, CheckInFilter, CheckOutFilter, GuestFilter, SearchFilter };
+export { CheckInFilter, CheckOutFilter, GuestFilter, LocationFilter, SearchFilter };

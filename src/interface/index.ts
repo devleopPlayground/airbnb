@@ -30,3 +30,7 @@ export type FilterValueType = {
   guest: number;
   category: string;
 };
+
+export type ParamsProps = {
+  params: { id: string };
+};

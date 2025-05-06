@@ -1,8 +1,10 @@
 'use client';
 
-import { CATEGORY_DATA } from '@/constants/category';
-import useCategory from './hooks/useCategory';
 import clsx from 'clsx';
+
+import { CATEGORY_DATA } from '@/constants/category';
+
+import useCategory from './hooks/useCategory';
 
 const Category = () => {
   const { filterValue, onUpdateCategory } = useCategory();

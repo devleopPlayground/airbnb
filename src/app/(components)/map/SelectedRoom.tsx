@@ -1,8 +1,10 @@
-import { selectedRoomAtom } from '@/atoms/mapAtoms';
-import { IMAGE_BLUR } from '@/constants/imageBlur';
 import { useAtom } from 'jotai';
 import Image from 'next/image';
+import Link from 'next/link';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
+
+import { selectedRoomAtom } from '@/atoms/mapAtoms';
+import { IMAGE_BLUR } from '@/constants/imageBlur';
 
 const SelectedRoom = () => {
   const [selectedRoom, setSelectedRoom] = useAtom(selectedRoomAtom);
@@ -19,24 +21,26 @@ const SelectedRoom = () => {
         >
           <AiOutlineCloseCircle />
         </button>
-        <div className="rounded-lg-t h-[200px] overflow-hidden">
-          <Image
-            width={384}
-            height={384}
-            src={selectedRoom.images[0]}
-            alt="room-image"
-            placeholder="blur"
-            blurDataURL={IMAGE_BLUR}
-            className="rounded-t-lg"
-          />
-        </div>
-        <div className="p-4 font-semibold bg-white rounded-b-lg flex flex-col gap-1">
-          <div>{selectedRoom.title}</div>
-          <div className="text-gray-400">{selectedRoom.address}</div>
-          <div className="">
-            {selectedRoom.price.toLocaleString()} 원 <span className="text-gray-400"> /박</span>
+        <Link href={`/rooms/${selectedRoom.id}`}>
+          <div className="rounded-lg-t h-[200px] overflow-hidden">
+            <Image
+              width={384}
+              height={384}
+              src={selectedRoom.images[0]}
+              alt="room-image"
+              placeholder="blur"
+              blurDataURL={IMAGE_BLUR}
+              className="rounded-t-lg"
+            />
           </div>
-        </div>
+          <div className="p-4 font-semibold bg-white rounded-b-lg flex flex-col gap-1">
+            <div>{selectedRoom.title}</div>
+            <div className="text-gray-400">{selectedRoom.address}</div>
+            <div className="">
+              {selectedRoom.price.toLocaleString()} 원 <span className="text-gray-400"> /박</span>
+            </div>
+          </div>
+        </Link>
       </div>
     </div>
   );

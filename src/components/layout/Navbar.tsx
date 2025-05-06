@@ -1,15 +1,16 @@
 'use client';
 
+import clsx from 'clsx';
+import Link from 'next/link';
 import React from 'react';
+import { AiOutlineMenu, AiOutlineSearch, AiOutlineUser } from 'react-icons/ai';
 import { MdModeOfTravel } from 'react-icons/md';
 import { RxDividerVertical } from 'react-icons/rx';
-import { AiOutlineSearch, AiOutlineMenu, AiOutlineUser } from 'react-icons/ai';
-import useNavbar from './hooks/useNavbar';
-import { navMenus } from './constants/navMenus';
-import clsx from 'clsx';
-import { navFilterList } from './constants/navFilterList';
+
 import { SearchFilter } from './components/Navbar/Filter';
-import Link from 'next/link';
+import { navFilterList } from './constants/navFilterList';
+import { navMenus } from './constants/navMenus';
+import useNavbar from './hooks/useNavbar';
 
 const Navbar = () => {
   const {

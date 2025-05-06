@@ -1,10 +1,11 @@
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
+import { Suspense } from 'react';
 
 import { getRooms } from '@/apis/rooms';
+import { LoaderGrid } from '@/components/common/Loader';
+
 import Category from '../(components)/category';
 import RoomList from '../(components)/room/RoomList';
-import { Suspense } from 'react';
-import { LoaderGrid } from '@/components/common/Loader';
 
 const HomePage = async () => {
   const queryClient = new QueryClient();

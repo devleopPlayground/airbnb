@@ -1,5 +1,6 @@
-import { filterValueAtom } from '@/atoms/filterAtoms';
 import { useAtom } from 'jotai';
+
+import { filterValueAtom } from '@/atoms/filterAtoms';
 
 const useCategory = () => {
   const [filterValue, setFilterValue] = useAtom(filterValueAtom);

@@ -1,5 +1,6 @@
-import { detailFilterAtom, filterValueAtom } from '@/atoms/filterAtoms';
 import { useAtom } from 'jotai';
+
+import { detailFilterAtom, filterValueAtom } from '@/atoms/filterAtoms';
 
 const useNavFilter = () => {
   const [filterValue, setFilterValue] = useAtom(filterValueAtom);

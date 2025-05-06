@@ -1,13 +1,13 @@
+import { AiOutlineStar } from 'react-icons/ai';
+import { BiSolidTree } from 'react-icons/bi';
+import { FaHouseUser, FaSkiing, FaWater } from 'react-icons/fa';
+import { FaHouseChimney } from 'react-icons/fa6';
+import { GiBarn, GiCampingTent, GiCaveEntrance, GiFamilyHouse, GiHolyOak, GiTreehouse } from 'react-icons/gi';
 import { IoPartlySunnyOutline } from 'react-icons/io5';
 import { MdDesignServices, MdOutlineWatchLater } from 'react-icons/md';
-import { GiHolyOak, GiCaveEntrance, GiCampingTent, GiBarn, GiFamilyHouse, GiTreehouse } from 'react-icons/gi';
 import { MdGolfCourse, MdOutlineBedroomChild, MdSurfing } from 'react-icons/md';
-import { FaHouseUser, FaSkiing, FaWater } from 'react-icons/fa';
-import { TbBeach, TbMoodKid, TbSwimming } from 'react-icons/tb';
-import { BiSolidTree } from 'react-icons/bi';
 import { PiIslandFill } from 'react-icons/pi';
-import { AiOutlineStar } from 'react-icons/ai';
-import { FaHouseChimney } from 'react-icons/fa6';
+import { TbBeach, TbMoodKid, TbSwimming } from 'react-icons/tb';
 
 export const CATEGORY = [
   '전망좋은',

@@ -1,6 +1,7 @@
-import type { LocationType, RoomType } from '@/interface';
-import { DEFAULT_LAT, DEFAULT_LNG, ZOOM_LEVEL } from '@/constants/mapPosition';
 import { atom } from 'jotai';
+
+import { DEFAULT_LAT, DEFAULT_LNG, ZOOM_LEVEL } from '@/constants/mapPosition';
+import type { LocationType, RoomType } from '@/interface';
 
 const locationAtom = atom<LocationType>({
   lat: DEFAULT_LAT,

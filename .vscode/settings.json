@@ -1,3 +1,9 @@
 {
-  "cSpell.words": ["Kakao"]
+  "cSpell.words": ["Kakao"],
+  "[javascript, typescript]": {
+    "editor.formatOnSave": true
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }

@@ -1,5 +1,5 @@
-import type { Config } from 'tailwindcss';
 import scrollbarHide from 'tailwind-scrollbar-hide';
+import type { Config } from 'tailwindcss';
 
 export default {
   plugins: [scrollbarHide],

@@ -1,5 +1,5 @@
-import { PrismaClient } from '@prisma/client';
 import { fakerKO as faker } from '@faker-js/faker';
+import { PrismaClient } from '@prisma/client';
 
 const CATEGORY = [
   '전망좋은',

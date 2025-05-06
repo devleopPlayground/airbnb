@@ -1,11 +1,13 @@
-import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
+
+import { prisma } from '@/lib/prisma';
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
 
   const page = searchParams.get('page') as string;
   const limit = searchParams.get('limit') as string;
+  const id = searchParams.get('id') as string;
 
   if (page) {
     // page 존재시 무한 스크롤
@@ -26,6 +28,18 @@ export async function GET(req: Request) {
       },
       { status: 200 },
     );
+  }
+
+  if (id) {
+    const roomDetail = await prisma.room.findFirst({
+      where: {
+        id: Number(id),
+      },
+    });
+
+    return NextResponse.json(roomDetail, {
+      status: 200,
+    });
   }
 
   const data = await prisma.room.findMany();

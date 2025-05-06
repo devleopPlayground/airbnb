@@ -1,8 +1,11 @@
-import type { Metadata } from 'next';
 import './globals.css';
-import { pretendard } from './fonts';
+
+import type { Metadata } from 'next';
+
 import LayoutProvider from '@/providers/LayoutProvider';
 import TanstackQueryProvider from '@/providers/TanstackQueryProvider';
+
+import { pretendard } from './fonts';
 
 export const metadata: Metadata = {
   title: 'Fastcampus Nextbnb로 여행하기',

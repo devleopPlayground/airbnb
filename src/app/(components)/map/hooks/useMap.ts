@@ -1,7 +1,8 @@
+import { useSetAtom } from 'jotai';
+
 import { selectedRoomAtom } from '@/atoms/mapAtoms';
 import { DEFAULT_LAT, DEFAULT_LNG, ZOOM_LEVEL } from '@/constants/mapPosition';
 import useGetMapRooms from '@/hooks/api/rooms/useGetMapRooms';
-import { useSetAtom } from 'jotai';
 
 const useMap = () => {
   const { rooms, isSuccess } = useGetMapRooms();

@@ -2,8 +2,9 @@
 'use client';
 
 import Script from 'next/script';
-import useMap from './hooks/useMap';
+
 import FullPageLoad from './FullPageLoad';
+import useMap from './hooks/useMap';
 
 /*globalKakao*/
 declare global {

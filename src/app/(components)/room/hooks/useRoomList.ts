@@ -1,9 +1,9 @@
-import { getRooms } from '@/apis/rooms';
-import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-
 import { useEffect, useRef } from 'react';
+
+import { getRooms } from '@/apis/rooms';
+import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 
 const useRoomList = () => {
   const ref = useRef<HTMLDivElement | null>(null);

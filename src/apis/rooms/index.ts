@@ -8,4 +8,8 @@ const getMapRooms = async () => {
   return await api.get('/api/rooms').then((response) => response.data);
 };
 
-export { getRooms, getMapRooms };
+const getRoomsDetail = async (id: string) => {
+  return await api.get(`/api/rooms?id=${id}`).then((response) => response.data);
+};
+
+export { getMapRooms, getRooms, getRoomsDetail };

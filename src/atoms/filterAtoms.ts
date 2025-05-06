@@ -1,5 +1,6 @@
-import type { DetailFilterType, FilterValueType } from '@/interface';
 import { atom } from 'jotai';
+
+import type { DetailFilterType, FilterValueType } from '@/interface';
 
 const detailFilterAtom = atom<DetailFilterType | null>(null);
 

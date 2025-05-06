@@ -1,4 +1,5 @@
-import { RefObject, useEffect, useState } from 'react';
+import type { RefObject } from 'react';
+import { useEffect, useState } from 'react';
 
 const useIntersectionObserver = (
   elementRef: RefObject<Element>, // 관찰할 DOM 요소의 ref
@@ -22,7 +23,7 @@ const useIntersectionObserver = (
     observer.observe(node);
 
     return () => observer.disconnect();
-  }, [elementRef?.current, JSON.stringify(threshold), root, rootMargin]);
+  }, [elementRef, root, rootMargin, threshold]);
 
   return entry; // isIntersecting, intersectionRatio, boundingClientRect 등의 정보를 얻을 수 있음
 };

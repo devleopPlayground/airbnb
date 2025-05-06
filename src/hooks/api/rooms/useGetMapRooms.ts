@@ -1,8 +1,9 @@
-import { getMapRooms } from '@/apis/rooms';
-import { RoomType } from '@/interface';
 import { useQuery } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
-import { ApiError } from 'next/dist/server/api-utils';
+import type { AxiosError } from 'axios';
+import type { ApiError } from 'next/dist/server/api-utils';
+
+import { getMapRooms } from '@/apis/rooms';
+import type { RoomType } from '@/interface';
 
 export type GetMapRoomResponse = RoomType[];
 
