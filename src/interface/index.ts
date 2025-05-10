@@ -7,6 +7,29 @@ export type RoomType = {
   category: string;
   lat: string;
   lng: string;
+  user?: UserType;
+  userId?: number;
+  description?: string;
+  bedroomDescription?: string;
+  freeCancel: boolean;
+  selfCheckIn: boolean;
+  officeSpace: boolean;
+  hasMountainView: boolean;
+  hasShampoo: boolean;
+  hasFreeLaundry: boolean;
+  hasAirCondition: boolean;
+  hasFreeWifi: boolean;
+  hasBarbecue: boolean;
+  hasFreeParking: boolean;
+};
+
+export type UserType = {
+  id: number;
+  email: string;
+  name?: string;
+  image?: string;
+  desc: string;
+  rooms?: RoomType[];
 };
 
 export type FaqType = {

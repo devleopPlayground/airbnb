@@ -1,15 +1,25 @@
 'use client';
 
-import useRoomDetail from './hooks/useRoomDetail';
+import useGetRoomDetail from '@/hooks/api/rooms/useGetRoomDetail';
+
+import FeatureSection from './FeatureSection';
+import HeaderSection from './HeaderSection';
+import MapSection from './MapSection';
 
 type RoomDetailProps = {
   id: string;
 };
 
 const RoomDetail = ({ id }: RoomDetailProps) => {
-  const { roomDetail } = useRoomDetail(id);
+  const { roomDetail } = useGetRoomDetail(id);
 
-  return <div className="mt-8 mb-20 max-w-6xl mx-auto">{JSON.stringify(roomDetail)}</div>;
+  return (
+    <div className="mt-8 mb-20 max-w-6xl mx-auto">
+      <HeaderSection data={roomDetail} />
+      <FeatureSection data={roomDetail} />
+      <MapSection data={roomDetail} />
+    </div>
+  );
 };
 
 export default RoomDetail;

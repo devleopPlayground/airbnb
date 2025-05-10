@@ -1,4 +1,4 @@
-import type { DetailFilterType } from '@/atoms/filterAtoms';
+import type { DetailFilterType } from '@/interface';
 
 type navFilterListType = {
   filterType: DetailFilterType;

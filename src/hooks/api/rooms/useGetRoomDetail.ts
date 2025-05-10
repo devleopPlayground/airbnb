@@ -12,8 +12,9 @@ export const revalidate = 60 * 60;
 
 const useGetRoomDetail = (id: string) => {
   const getRoomDetailQuery = useQuery<GetRoomDetailResponse, AxiosError<ApiError>>({
-    queryKey: ['room-detail'],
+    queryKey: ['room-detail', id],
     queryFn: () => getRoomsDetail(id),
+    staleTime: 1000 * 60 * 5,
   });
 
   return { roomDetail: getRoomDetailQuery.data, ...getRoomDetailQuery };

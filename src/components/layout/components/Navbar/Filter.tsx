@@ -3,7 +3,7 @@ import 'dayjs/locale/ko';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
 import Calendar from 'react-calendar';
-import { AiOutlineMinusCircle,AiOutlinePlusCircle } from 'react-icons/ai';
+import { AiOutlineMinusCircle, AiOutlinePlusCircle } from 'react-icons/ai';
 
 import FilterLayout from './FilterLayout';
 import useNavFilter from './hooks/useNavFilter';

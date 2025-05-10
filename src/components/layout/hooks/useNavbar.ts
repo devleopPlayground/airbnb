@@ -2,7 +2,8 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-import { detailFilterAtom, type DetailFilterType,filterValueAtom } from '@/atoms/filterAtoms';
+import { detailFilterAtom, filterValueAtom } from '@/atoms/filterAtoms';
+import type { DetailFilterType } from '@/interface';
 
 const useNavbar = () => {
   const [isShowMenu, setIsShowMenu] = useState(false);
