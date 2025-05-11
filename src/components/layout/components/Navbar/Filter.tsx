@@ -38,6 +38,8 @@ const CheckInFilter = () => {
   return (
     <FilterLayout title="체크인 날짜 설정하기" isShowFilter={detailFilter == 'checkIn'}>
       <Calendar
+        next2Label={null}
+        prev2Label={null}
         className="mt-8 mx-auto"
         defaultValue={filterValue.checkIn ? new Date(filterValue.checkIn) : null}
         minDate={new Date()}
@@ -54,6 +56,8 @@ const CheckOutFilter = () => {
   return (
     <FilterLayout title="체크아웃 날짜 설정하기" isShowFilter={detailFilter == 'checkOut'}>
       <Calendar
+        next2Label={null}
+        prev2Label={null}
         className="mt-8 mx-auto"
         defaultValue={filterValue.checkOut ? new Date(filterValue.checkOut) : null}
         minDate={

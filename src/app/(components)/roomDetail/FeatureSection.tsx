@@ -11,6 +11,7 @@ import { FeatureDesc } from '@/constants/room';
 import type { RoomType } from '@/interface';
 
 import BookingSection from './BookingSection';
+import CalendarSection from './CalendarSection';
 
 type FeatureSectionProps = {
   data?: RoomType;
@@ -112,9 +113,9 @@ const FeatureSection = ({ data }: FeatureSectionProps) => {
             </div>
           </div>
         </div>
-        <div className="py-8 px-4 border-b border-gray-300 leading-8 text-gray-800">
+        <div className="py-8 border-b border-gray-300 leading-8 text-gray-800">
           <h1 className="font-semibold text-xl mb-2">캘린더</h1>
-          <div className="mt-4 rounded-lg p-5 border border-gray-300">캘린더가 들어갑니다.</div>
+          <CalendarSection />
         </div>
         <div className="py-8 px-4 border-b border-gray-300 leading-8 text-gray-800">
           <h1 className="font-semibold text-xl mb-2">후기</h1>
