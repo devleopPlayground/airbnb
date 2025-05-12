@@ -8,7 +8,9 @@ import Calendar from 'react-calendar';
 import useCalendar from './hooks/useCalendar';
 
 const CalendarSection = () => {
-  const { filterValue, onChangeDateFilter } = useCalendar();
+  const { filterValue, onChangeDateFilter, isMount } = useCalendar();
+
+  if (!isMount) return null;
 
   return (
     <div className="mt-4 flex flex-col gap-4">

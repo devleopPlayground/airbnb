@@ -22,7 +22,7 @@ const useImageModal = () => {
     setIsMounted(true);
 
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = 'unset';
     };
   }, [isMounted]);
 

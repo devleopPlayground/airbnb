@@ -3,13 +3,14 @@
 import { QueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import { AiOutlineUnorderedList } from 'react-icons/ai';
-import { CiHeart, CiShare1 } from 'react-icons/ci';
+import { CiHeart } from 'react-icons/ci';
 
 import { IMAGE_BLUR } from '@/constants/imageBlur';
 import type { GetRoomDetailResponse } from '@/hooks/api/rooms/useGetRoomDetail';
 import type { RoomType } from '@/interface';
 
 import useHeaderSection from './hooks/useHeaderSection';
+import ShareSection from './ShareSection';
 
 type HeaderSectionProps = {
   data?: RoomType;
@@ -27,13 +28,7 @@ const HeaderSection = ({ data }: HeaderSectionProps) => {
       <div className="flex w-full justify-between items-center px-4">
         <div className="underline text-xs md:text-sm mt-2">{data?.address}</div>
         <div className="flex gap-2 text-xs md:text-sm mt-2">
-          <button
-            type="button"
-            className="flex gap-2 items-center px-2 py-1.5 rounded-lg hover:bg-black/10 cursor-pointer"
-          >
-            <CiShare1 />
-            <span className="underline underline-offset-2">공유하기</span>
-          </button>
+          <ShareSection data={data} />
           <button
             type="button"
             className="flex gap-2 items-center px-2 py-1.5 rounded-lg hover:bg-black/10 cursor-pointer"

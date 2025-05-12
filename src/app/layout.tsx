@@ -2,6 +2,7 @@ import './globals.css';
 
 import type { Metadata } from 'next';
 
+import Modal from '@/components/Modal';
 import LayoutProvider from '@/providers/LayoutProvider';
 import TanstackQueryProvider from '@/providers/TanstackQueryProvider';
 
@@ -23,6 +24,7 @@ export default function RootLayout({
         <TanstackQueryProvider>
           <LayoutProvider>{children}</LayoutProvider>
         </TanstackQueryProvider>
+        <Modal />
       </body>
     </html>
   );
