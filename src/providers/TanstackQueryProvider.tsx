@@ -2,6 +2,7 @@
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { SessionProvider } from 'next-auth/react';
 import { Toaster } from 'react-hot-toast';
 
 type TanstackQueryProviderProps = {
@@ -20,9 +21,11 @@ const TanstackQueryProvider = ({ children }: TanstackQueryProviderProps) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {children}
+      <SessionProvider>
+        {children}
+        <Toaster />
+      </SessionProvider>
       <ReactQueryDevtools />
-      <Toaster />
     </QueryClientProvider>
   );
 };

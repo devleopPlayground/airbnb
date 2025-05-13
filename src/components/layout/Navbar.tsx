@@ -2,6 +2,7 @@
 
 import clsx from 'clsx';
 import Link from 'next/link';
+import { signOut } from 'next-auth/react';
 import React from 'react';
 import { AiOutlineMenu, AiOutlineSearch, AiOutlineUser } from 'react-icons/ai';
 import { MdModeOfTravel } from 'react-icons/md';
@@ -9,11 +10,13 @@ import { RxDividerVertical } from 'react-icons/rx';
 
 import { SearchFilter } from './components/Navbar/Filter';
 import { navFilterList } from './constants/navFilterList';
-import { navMenus } from './constants/navMenus';
+import { LOGIN_USER_MENU, LOGOUT_USER_MENU } from './constants/navMenus';
 import useNavbar from './hooks/useNavbar';
 
 const Navbar = () => {
   const {
+    status,
+    session,
     isShowMenu,
     isShowFilter,
     detailFilter,
@@ -122,19 +125,37 @@ const Navbar = () => {
           onClick={onClickShowMenu}
         >
           <AiOutlineMenu />
-          <AiOutlineUser />
+
+          {status === 'authenticated' && session?.user?.image ? (
+            <img src={session?.user?.image} className="rounded-full size-4 my-auto" alt="user-image" />
+          ) : (
+            <AiOutlineUser />
+          )}
         </button>
         {isShowMenu && (
           <div className="border-gray-200 shadow-lg py-2 flex flex-col absolute top-12 bg-white w-60 rounded-lg">
-            {navMenus.map((menu) => (
-              <button
-                key={menu.id}
-                className="h-10 hover:bg-gray-50 text-sm text-gray-700 pl-3 text-left cursor-pointer"
-                onClick={() => onClickHrefUrl(menu.href)}
-              >
-                {menu.title}
-              </button>
-            ))}
+            {status === 'authenticated'
+              ? LOGOUT_USER_MENU.map((menu) => (
+                  <button
+                    key={menu.id}
+                    className="h-10 hover:bg-gray-50 text-sm text-gray-700 pl-3 text-left cursor-pointer"
+                    onClick={() => {
+                      onClickHrefUrl(menu.href);
+                      if (menu.signOut) signOut();
+                    }}
+                  >
+                    {menu.title}
+                  </button>
+                ))
+              : LOGIN_USER_MENU.map((menu) => (
+                  <button
+                    key={menu.id}
+                    className="h-10 hover:bg-gray-50 text-sm text-gray-700 pl-3 text-left cursor-pointer"
+                    onClick={() => onClickHrefUrl(menu.href)}
+                  >
+                    {menu.title}
+                  </button>
+                ))}
           </div>
         )}
       </div>
