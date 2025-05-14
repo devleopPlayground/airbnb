@@ -23,6 +23,11 @@ export type RoomType = {
   hasFreeParking: boolean;
 };
 
+type AccountType = {
+  id: string;
+  provider: string;
+};
+
 export type UserType = {
   id: number;
   email: string;
@@ -30,6 +35,15 @@ export type UserType = {
   image?: string;
   desc: string;
   rooms?: RoomType[];
+  accounts?: AccountType[];
+  phone?: string;
+  address?: string;
+};
+
+export type FormEditProfileType = {
+  name?: string;
+  phone?: string;
+  address?: string;
 };
 
 export type FaqType = {

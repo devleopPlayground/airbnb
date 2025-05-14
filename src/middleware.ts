@@ -14,5 +14,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/users/mypage', '/users/info'],
+  matcher: ['/users/mypage', '/users/info', '/users/edit'],
 };
