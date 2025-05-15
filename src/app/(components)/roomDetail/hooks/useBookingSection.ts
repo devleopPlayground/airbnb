@@ -11,7 +11,6 @@ const useBookingSection = () => {
     e: ChangeEvent<T>,
     keyword: DetailFilterType,
   ) => {
-    console.log(e.target instanceof HTMLInputElement);
     setFilterValue((prevState) => ({
       ...prevState,
       [keyword]: e.target instanceof HTMLInputElement ? e.target.value : Number(e.target.value),

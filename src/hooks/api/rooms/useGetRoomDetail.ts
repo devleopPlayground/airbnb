@@ -15,6 +15,7 @@ const useGetRoomDetail = (id: string) => {
     queryKey: ['room-detail', id],
     queryFn: () => getRoomsDetail(id),
     staleTime: 1000 * 60 * 5,
+    enabled: !!id,
   });
 
   return { roomDetail: getRoomDetailQuery.data, ...getRoomDetailQuery };

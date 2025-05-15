@@ -19,8 +19,6 @@ const Spinner = ({ size = 'md' }: SpinnerProps) => {
     }
   };
 
-  console.log(sizeStyle);
-
   return (
     <span
       className={`${sizeStyle()} border-4 border-white border-b-red-500 rounded-full animate-spin`}

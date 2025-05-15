@@ -16,7 +16,7 @@ const SignInPage = () => {
     try {
       signIn(authKey, { callbackUrl: '/' });
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast.error('로그인에 실패했습니다.');
     }
   };

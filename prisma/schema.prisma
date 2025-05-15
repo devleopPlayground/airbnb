@@ -52,6 +52,16 @@ model User {
   phone          String?
   address        String?
   sessions       Session[]
+  likes          Like[]
+}
+
+model Like {
+  id             Int         @id @default(autoincrement())
+  createdAt      DateTime    @default(now())
+  userId         String
+  roomId         Int
+  user           User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  room           Room        @relation(fields: [roomId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {
@@ -85,6 +95,8 @@ model Room {
   hasBarbecue           Boolean     @default(false)
   hasFreeParking        Boolean     @default(false)
   userId                String?
+  createdAt      DateTime    @default(now())
+  likes          Like[]
   user                  User?        @relation(fields: [userId], references: [id], onDelete: Cascade)
   @@index([userId])
 }

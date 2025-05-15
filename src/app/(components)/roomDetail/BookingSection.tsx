@@ -15,8 +15,6 @@ type BookingSectionProps = {
 const BookingSection = ({ data }: BookingSectionProps) => {
   const { filterValue, onChangeDateSection } = useBookingSection();
 
-  console.log('filterValue', filterValue);
-
   return (
     <div className="w-full">
       <div className="mt-8 shadow-lg rounded-lg border border-gray-300 px-6 py-8 md:sticky md:top-25">

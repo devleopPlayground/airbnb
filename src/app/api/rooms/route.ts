@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 
+import { auth } from '@/auth';
 import { prisma } from '@/lib/prisma';
 
 export async function GET(req: Request) {
@@ -31,9 +32,16 @@ export async function GET(req: Request) {
   }
 
   if (id) {
+    const session = await auth();
+
     const roomDetail = await prisma.room.findFirst({
       where: {
         id: Number(id),
+      },
+      include: {
+        likes: {
+          where: session?.user?.id ? { userId: session.user.id } : {},
+        },
       },
     });
 

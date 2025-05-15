@@ -21,11 +21,19 @@ export type RoomType = {
   hasFreeWifi: boolean;
   hasBarbecue: boolean;
   hasFreeParking: boolean;
+  likes?: LikeType[];
 };
 
 type AccountType = {
   id: string;
   provider: string;
+};
+
+export type LikeType = {
+  id: number;
+  roomId: number;
+  userId: string;
+  createdAt: string;
 };
 
 export type UserType = {
