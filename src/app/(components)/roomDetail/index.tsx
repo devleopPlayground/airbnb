@@ -2,6 +2,7 @@
 
 import useGetRoomDetail from '@/hooks/api/rooms/useGetRoomDetail';
 
+import CommentSection from './comment';
 import FeatureSection from './FeatureSection';
 import HeaderSection from './HeaderSection';
 import MapSection from './MapSection';
@@ -17,6 +18,7 @@ const RoomDetail = ({ id }: RoomDetailProps) => {
     <div className="mt-8 mb-20 max-w-6xl mx-auto">
       <HeaderSection data={roomDetail} />
       <FeatureSection data={roomDetail} />
+      <CommentSection room={roomDetail} />
       <MapSection data={roomDetail} />
     </div>
   );

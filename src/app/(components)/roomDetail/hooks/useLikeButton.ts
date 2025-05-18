@@ -3,14 +3,13 @@ import { useSession } from 'next-auth/react';
 import toast from 'react-hot-toast';
 
 import usePostLikeRoom from '@/hooks/api/likes/usePostLikeRoom';
-import type { LikeType } from '@/interface';
 
 const useLikeButton = (roomId: number) => {
   const session = useSession();
   const queryClient = useQueryClient();
 
   const { mutate: postLike } = usePostLikeRoom({
-    onSuccess: (response: { status: number; data: LikeType }) => {
+    onSuccess: (response) => {
       if (response.status === 201) {
         toast.success('좋아요에 성공했습니다.');
       } else {

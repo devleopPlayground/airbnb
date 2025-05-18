@@ -14,7 +14,6 @@ const useGetRoomDetail = (id: string) => {
   const getRoomDetailQuery = useQuery<GetRoomDetailResponse, AxiosError<ApiError>>({
     queryKey: ['room-detail', id],
     queryFn: () => getRoomsDetail(id),
-    staleTime: 1000 * 60 * 5,
     enabled: !!id,
   });
 

@@ -39,9 +39,11 @@ export async function GET(req: Request) {
         id: Number(id),
       },
       include: {
-        likes: {
-          where: session?.user?.id ? { userId: session.user.id } : {},
-        },
+        likes: session?.user?.id
+          ? {
+              where: { userId: session?.user?.id },
+            }
+          : false,
       },
     });
 

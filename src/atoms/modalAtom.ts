@@ -10,7 +10,7 @@ export const modalAtom = atom<ModalState>({
   children: null,
 });
 
-// write-only
+// write-only (null은 read함수가 없다는걸 의미함)
 export const openModalAtom = atom(null, (get, set, children: React.ReactNode) => {
   set(modalAtom, { isOpen: true, children });
 });

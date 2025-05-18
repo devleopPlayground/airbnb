@@ -22,6 +22,7 @@ export type RoomType = {
   hasBarbecue: boolean;
   hasFreeParking: boolean;
   likes?: LikeType[];
+  comments?: CommentType[];
 };
 
 type AccountType = {
@@ -36,6 +37,22 @@ export type LikeType = {
   createdAt: string;
 };
 
+export type CommentResponseApiType = {
+  comments?: CommentType[];
+  totalCount?: number;
+};
+
+export type CommentType = {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  userId: string;
+  roomId: number;
+  body: string;
+  user: UserType;
+  room: RoomType;
+};
+
 export type UserType = {
   id: number;
   email: string;
@@ -46,6 +63,7 @@ export type UserType = {
   accounts?: AccountType[];
   phone?: string;
   address?: string;
+  comments?: CommentType[];
 };
 
 export type FormEditProfileType = {

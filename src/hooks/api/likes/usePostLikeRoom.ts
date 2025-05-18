@@ -4,12 +4,12 @@ import { useMutation } from '@tanstack/react-query';
 import { postLike } from '@/apis/likes';
 import type { LikeType } from '@/interface';
 
-interface ApiResponse {
+type PostLikeRoomResponse = {
   data: LikeType;
   status: number;
-}
+};
 
-const usePostLikeRoom = (options?: UseMutationOptions<ApiResponse, Error, number>) => {
+const usePostLikeRoom = (options?: UseMutationOptions<PostLikeRoomResponse, Error, number>) => {
   return useMutation({
     mutationFn: (roomId: number) => postLike(roomId),
     ...options,

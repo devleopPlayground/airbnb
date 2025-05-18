@@ -53,6 +53,19 @@ model User {
   address        String?
   sessions       Session[]
   likes          Like[]
+  comments       Comment[]
+}
+
+model Comment {
+  id             Int         @id @default(autoincrement())
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  userId         String
+  roomId         Int
+  body           String
+  user           User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  room           Room        @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  @@index([userId, roomId])
 }
 
 model Like {
@@ -95,9 +108,10 @@ model Room {
   hasBarbecue           Boolean     @default(false)
   hasFreeParking        Boolean     @default(false)
   userId                String?
-  createdAt      DateTime    @default(now())
-  likes          Like[]
+  createdAt             DateTime    @default(now())
+  likes                 Like[]
   user                  User?        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comments              Comment[]
   @@index([userId])
 }
 

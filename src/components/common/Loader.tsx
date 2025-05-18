@@ -1,7 +1,9 @@
 import clsx from 'clsx';
 import type { HTMLAttributes } from 'react';
 
-type LoaderProps = HTMLAttributes<HTMLDivElement>;
+type LoaderProps = HTMLAttributes<HTMLDivElement> & {
+  counts?: number;
+};
 
 type SpinnerProps = {
   size?: 'sm' | 'md' | 'lg';
@@ -28,7 +30,7 @@ const Spinner = ({ size = 'md' }: SpinnerProps) => {
 
 const Loader = ({ ...props }: LoaderProps) => {
   return (
-    <div className={clsx('flex gap-4 justify-center', props?.className)} {...props}>
+    <div className={clsx('flex gap-4 justify-center', props?.className)}>
       <div className="w-2 h-2 rounded-full bg-gray-500 animate-ping"></div>
       <div className="w-2 h-2 rounded-full bg-gray-500 animate-ping"></div>
       <div className="w-2 h-2 rounded-full bg-gray-500 animate-ping"></div>
@@ -36,16 +38,13 @@ const Loader = ({ ...props }: LoaderProps) => {
   );
 };
 
-const LoaderGrid = ({ ...props }: LoaderProps) => {
+const LoaderGrid = ({ counts = 12, ...props }: LoaderProps) => {
   return (
     <>
-      {[...Array(12)].map((_, idx) => (
+      {[...Array(counts)].map((_, idx) => (
         <div
           key={idx}
-          className={clsx(
-            'rounded-md w-full h-72 md:h-64 bg-gray-100 animate-pulse object-fit z-0',
-            props?.className,
-          )}
+          className={clsx('rounded-md w-full bg-gray-100 animate-pulse object-fit z-0', props?.className)}
         />
       ))}
     </>

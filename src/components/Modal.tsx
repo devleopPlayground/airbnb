@@ -1,10 +1,13 @@
 'use client';
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 import { closeModalAtom, modalAtom } from '@/atoms/modalAtom';
+
+const queryClient = new QueryClient();
 
 export default function Modal() {
   const [{ isOpen, children }] = useAtom(modalAtom);
@@ -32,12 +35,14 @@ export default function Modal() {
   if (!isOpen) return null;
 
   return createPortal(
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      <div className="absolute inset-0 bg-black/50" />
-      <div ref={modalRef} className="relative bg-white rounded-lg p-6 w-fit min-w-sm max-w-3xl mx-4">
-        {children}
+    <QueryClientProvider client={queryClient}>
+      <div className="fixed inset-0 z-50 flex items-center justify-center">
+        <div className="absolute inset-0 bg-black/50" />
+        <div ref={modalRef} className="relative bg-white rounded-lg p-6 w-fit min-w-sm max-w-3xl mx-4">
+          {children}
+        </div>
       </div>
-    </div>,
+    </QueryClientProvider>,
     document.body,
   );
 }
