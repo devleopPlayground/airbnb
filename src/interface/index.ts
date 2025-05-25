@@ -35,6 +35,7 @@ export type LikeType = {
   roomId: number;
   userId: string;
   createdAt: string;
+  room: RoomType;
 };
 
 export type CommentResponseApiType = {

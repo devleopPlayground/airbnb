@@ -1,6 +1,7 @@
 import { Loader } from '@/components/common/Loader';
 import type { CommentResponseApiType } from '@/interface';
 
+import CommentItem from './CommentItem';
 import useCommentList from './hooks/useCommentList';
 
 type CommentListProps = CommentResponseApiType & {
@@ -18,22 +19,7 @@ const CommentList = ({ comments, totalCount, isLoading, roomId }: CommentListPro
         {isLoading ? (
           <Loader className="col-span-2" />
         ) : (
-          comments?.map((comment) => (
-            <div key={comment.id} className="flex flex-col gap-2">
-              <div className="flex gap-2 items-center">
-                <img
-                  src={comment?.user.image || '/images/user.png'}
-                  className="size-12 rounded-full"
-                  alt="user-icon"
-                />
-                <div>
-                  <h1 className="font-semibold">{comment?.user.name || '-'}</h1>
-                  <div className="text-gray-500 text-xs">{comment?.createdAt}</div>
-                </div>
-              </div>
-              <div className="max-w-md text-gray-600">{comment?.body}</div>
-            </div>
-          ))
+          comments?.map((comment) => <CommentItem key={comment.id} comment={comment} />)
         )}
       </div>
       {totalCount && totalCount > 6 ? (

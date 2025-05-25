@@ -18,11 +18,11 @@ const useRoomList = () => {
 
   const {
     data: rooms,
+    isLoading,
     isFetching,
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-    isLoading,
     isError,
   } = useSuspenseInfiniteQuery({
     queryKey: ['rooms'],
@@ -37,13 +37,15 @@ const useRoomList = () => {
 
   useEffect(() => {
     if (isPageEnd && hasNextPage) {
-      setTimeout(() => {
+      const timeout = setTimeout(() => {
         fetchNextPage();
       }, 500);
+
+      return () => clearTimeout(timeout);
     }
   }, [isPageEnd, hasNextPage, fetchNextPage]);
 
-  return { rooms, isFetching, hasNextPage, isFetchingNextPage, isLoading, ref, onNavigateMap };
+  return { rooms, isFetching, isLoading, hasNextPage, isFetchingNextPage, ref, onNavigateMap };
 };
 
 export default useRoomList;

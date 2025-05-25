@@ -29,9 +29,11 @@ const useCommentModalContent = (roomId?: string) => {
 
   useEffect(() => {
     if (isPageEnd && hasNextPage) {
-      setTimeout(() => {
+      const timeout = setTimeout(() => {
         fetchNextPage();
       }, 500);
+
+      return () => clearTimeout(timeout);
     }
   }, [isPageEnd, hasNextPage, fetchNextPage]);
 

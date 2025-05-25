@@ -9,8 +9,8 @@ import TanstackQueryProvider from '@/providers/TanstackQueryProvider';
 import { pretendard } from './fonts';
 
 export const metadata: Metadata = {
-  title: 'Fastcampus Nextbnb로 여행하기',
-  description: 'Fastcampus Nextbnb로 여행을 해보세요.',
+  title: 'airbnb로 여행하기',
+  description: 'airbnb로 여행을 해보세요.',
 };
 
 export default function RootLayout({

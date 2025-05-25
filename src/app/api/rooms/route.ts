@@ -14,6 +14,7 @@ export async function GET(req: Request) {
     // page 존재시 무한 스크롤
     const count = await prisma.room.count();
     const skipPage = Number(page) - 1;
+
     const rooms = await prisma.room.findMany({
       orderBy: { id: 'asc' },
       take: Number(limit),

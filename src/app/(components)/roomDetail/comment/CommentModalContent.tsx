@@ -6,6 +6,7 @@ import { IoClose } from 'react-icons/io5';
 import { Loader, LoaderGrid } from '@/components/common/Loader';
 import type { CommentType } from '@/interface';
 
+import CommentItem from './CommentItem';
 import useCommentList from './hooks/useCommentList';
 import useCommentModalContent from './hooks/useCommentModalContent';
 
@@ -26,30 +27,15 @@ const CommentModalContent = ({ roomId }: CommentModalContentProps) => {
             <IoClose className="size-6" />
           </button>
         </div>
-        <div className="text-[15px] mb-6 text-gray-600">전체 후기: 248개</div>
+        <div className="text-[15px] mb-6 text-gray-600">전체 후기: {comments?.pages[0]?.totalCount}개</div>
       </div>
       <div className="mt-4 flex flex-col gap-6">
         {isLoading || isFetching ? (
-          <LoaderGrid counts={7} className="h-16" />
+          <LoaderGrid counts={7} className="h-28" />
         ) : (
           comments?.pages?.map((page, idx) => (
             <React.Fragment key={idx}>
-              {page?.data?.map((comment: CommentType) => (
-                <div key={comment.id} className="flex flex-col gap-2">
-                  <div className="flex gap-2 items-center">
-                    <img
-                      src={comment?.user?.image || '/images/user.png'}
-                      className="size-12 rounded-full"
-                      alt="user-icon"
-                    />
-                    <div>
-                      <h1 className="font-semibold">{comment?.user.name || '-'}</h1>
-                      <div className="text-gray-500 text-xs">{comment?.createdAt}</div>
-                    </div>
-                  </div>
-                  <div className="text-gray-600">{comment?.body}</div>
-                </div>
-              ))}
+              {page?.data?.map((comment: CommentType) => <CommentItem key={comment.id} comment={comment} />)}
             </React.Fragment>
           ))
         )}

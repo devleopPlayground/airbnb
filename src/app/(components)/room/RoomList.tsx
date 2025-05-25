@@ -11,13 +11,13 @@ import GridLayout from './GridLayout';
 import useRoomList from './hooks/useRoomList';
 
 const RoomList = () => {
-  const { ref, rooms, isFetching, hasNextPage, isFetchingNextPage, isLoading, onNavigateMap } = useRoomList();
+  const { ref, rooms, isFetching, isLoading, hasNextPage, isFetchingNextPage, onNavigateMap } = useRoomList();
 
   return (
     <>
       <GridLayout>
         {isLoading || isFetching ? (
-          <LoaderGrid />
+          <LoaderGrid className="h-[375px] sm:h-[340px] md:h-[366px] lg:h-[437px]" />
         ) : (
           rooms?.pages?.map((page, idx) => (
             <React.Fragment key={idx}>

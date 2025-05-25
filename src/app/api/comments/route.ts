@@ -25,26 +25,26 @@ export async function POST(req: Request) {
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
+  const session = await auth();
 
   const roomId = searchParams.get('roomId') as string;
   const limit = searchParams.get('limit') as string;
   const page = searchParams.get('page') as string;
-
-  if (!roomId) {
-    return NextResponse.json({ error: 'RoomId is required' }, { status: 400 });
-  }
+  const my = searchParams.get('my') as string;
 
   if (page) {
     // page파라미터가 존재하는 경우 댓글 무한스크롤 적용
     const count = await prisma.comment.count({
       where: {
-        roomId: Number(roomId),
+        roomId: roomId ? Number(roomId) : {},
+        userId: my ? session?.user?.id : {},
       },
     });
     const skipPage = Number(page) - 1;
     const comments = await prisma.comment.findMany({
       where: {
-        roomId: Number(roomId),
+        roomId: roomId ? Number(roomId) : {},
+        userId: my ? session?.user?.id : {},
       },
       include: {
         user: true,
