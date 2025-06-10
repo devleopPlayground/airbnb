@@ -1,10 +1,13 @@
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
+import { useRouter } from 'next/navigation';
 import type { ChangeEvent } from 'react';
 
 import { filterValueAtom } from '@/atoms/filterAtoms';
-import type { DetailFilterType } from '@/interface';
+import { calculatorFilterState } from '@/atoms/selector';
+import type { DetailFilterType, RoomType } from '@/interface';
 
-const useBookingSection = () => {
+const useBookingSection = (data: RoomType) => {
+  const router = useRouter();
   const [filterValue, setFilterValue] = useAtom(filterValueAtom);
 
   const onChangeDateSection = <T extends HTMLInputElement | HTMLSelectElement>(
@@ -17,9 +20,24 @@ const useBookingSection = () => {
     }));
   };
 
+  const calculatedFilter = useAtomValue(calculatorFilterState);
+
+  const totalAmount = data?.price * calculatedFilter.dayCount;
+  const checkedFormValidate = totalAmount > 0 && calculatedFilter.guestCount > 0;
+
+  const handleSubmit = () => {
+    router.push(
+      `/rooms/${data.id}/bookings?checkIn=${filterValue.checkIn}&checkOut=${filterValue.checkOut}&guestCount=${calculatedFilter.guestCount}&totalAmount=${totalAmount}&totalDays=${calculatedFilter.dayCount}`,
+    );
+  };
+
   return {
     filterValue,
+    calculatedFilter,
+    totalAmount,
+    checkedFormValidate,
     onChangeDateSection,
+    handleSubmit,
   };
 };
 

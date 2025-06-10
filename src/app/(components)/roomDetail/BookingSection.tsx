@@ -9,11 +9,18 @@ import type { RoomType } from '@/interface';
 import useBookingSection from './hooks/useBookingSection';
 
 type BookingSectionProps = {
-  data?: RoomType;
+  data: RoomType;
 };
 
 const BookingSection = ({ data }: BookingSectionProps) => {
-  const { filterValue, onChangeDateSection } = useBookingSection();
+  const {
+    filterValue,
+    calculatedFilter,
+    totalAmount,
+    checkedFormValidate,
+    onChangeDateSection,
+    handleSubmit,
+  } = useBookingSection(data);
 
   return (
     <div className="w-full">
@@ -73,8 +80,10 @@ const BookingSection = ({ data }: BookingSectionProps) => {
           </div>
           <div className="mt-6">
             <button
-              className="bg-rose-500 hover:bg-rose-600 text-white rounded-md py-2.5 w-full cursor-pointer"
-              type="submit"
+              className="bg-rose-500 hover:bg-rose-600 text-white rounded-md py-2.5 w-full cursor-pointer disabled:bg-gray-300 disabled:cursor-default"
+              disabled={!checkedFormValidate}
+              onClick={handleSubmit}
+              type="button"
             >
               예약하기
             </button>
@@ -86,9 +95,9 @@ const BookingSection = ({ data }: BookingSectionProps) => {
         <div className="mt-4 flex flex-col gap-2 border-b border-b-gray-300 pb-4 text-xs md:text-sm">
           <div className="flex justify-between">
             <div className="text-gray-600 underline underline-offset-4">
-              {data?.price?.toLocaleString()} x 5박
+              {data?.price?.toLocaleString()} x {calculatedFilter.dayCount}박
             </div>
-            <div className="text-gray-500">₩271,420</div>
+            <div className="text-gray-500">₩{(data?.price * calculatedFilter.dayCount).toLocaleString()}</div>
           </div>
           <div className="flex justify-between">
             <div className="text-gray-600 underline underline-offset-4">nextBnb 수수료</div>
@@ -96,7 +105,7 @@ const BookingSection = ({ data }: BookingSectionProps) => {
           </div>
           <div className="flex justify-between mt-6">
             <div>총 합계</div>
-            <div>₩271,420</div>
+            <div>₩{totalAmount.toLocaleString()}</div>
           </div>
         </div>
       </div>

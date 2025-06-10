@@ -14,7 +14,7 @@ import BookingSection from './BookingSection';
 import CalendarSection from './CalendarSection';
 
 type FeatureSectionProps = {
-  data?: RoomType;
+  data: RoomType;
 };
 
 const FeatureSection = ({ data }: FeatureSectionProps) => {

@@ -53,6 +53,7 @@ model User {
   address        String?
   sessions       Session[]
   likes          Like[]
+  bookings       Booking[]
   comments       Comment[]
 }
 
@@ -110,6 +111,7 @@ model Room {
   userId                String?
   createdAt             DateTime    @default(now())
   likes                 Like[]
+  bookings              Booking[]
   user                  User?        @relation(fields: [userId], references: [id], onDelete: Cascade)
   comments              Comment[]
   @@index([userId])
@@ -119,4 +121,25 @@ model Faq {
   id             Int         @id @default(autoincrement())
   title          String
   description    String
+}
+
+model Booking {
+  id             Int         @id @default(autoincrement())
+  checkIn        DateTime
+  checkOut       DateTime
+  guestCount     Int
+  totalDays      Int
+  totalAmount    Int
+  roomId         Int
+  userId         String
+  room           Room        @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  user           User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @default(now())
+  status         BookingStatus
+} 
+
+enum BookingStatus {
+  SUCCESS
+  CANCEL  
 }

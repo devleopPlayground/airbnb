@@ -8,7 +8,7 @@ const filterValueAtom = atom<FilterValueType>({
   location: '',
   checkIn: '',
   checkOut: '',
-  guest: 0,
+  guest: 1,
   category: '',
 });
 
