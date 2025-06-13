@@ -3,6 +3,7 @@
 import 'dayjs/locale/ko';
 
 import dayjs from 'dayjs';
+import { useSession } from 'next-auth/react';
 
 import type { RoomType } from '@/interface';
 
@@ -13,6 +14,7 @@ type BookingSectionProps = {
 };
 
 const BookingSection = ({ data }: BookingSectionProps) => {
+  const session = useSession();
   const {
     filterValue,
     calculatedFilter,
@@ -81,7 +83,7 @@ const BookingSection = ({ data }: BookingSectionProps) => {
           <div className="mt-6">
             <button
               className="bg-rose-500 hover:bg-rose-600 text-white rounded-md py-2.5 w-full cursor-pointer disabled:bg-gray-300 disabled:cursor-default"
-              disabled={!checkedFormValidate}
+              disabled={!checkedFormValidate || session.status == 'unauthenticated'}
               onClick={handleSubmit}
               type="button"
             >

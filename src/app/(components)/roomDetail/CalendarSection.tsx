@@ -39,7 +39,7 @@ const CalendarSection = () => {
               : new Date()
           }
           onChange={(e) => onChangeDateFilter(e as Date, 'checkOut')}
-          defaultValue={filterValue.checkOut ? filterValue.checkOut : null}
+          defaultValue={filterValue.checkOut ? new Date(filterValue.checkOut) : null}
           formatDay={(_, date) => dayjs(date).format('DD')}
         />
       </div>

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import SubmitButton from '@/app/(components)/booking/SubmitButton';
 import { IMAGE_BLUR } from '@/constants/imageBlur';
 import type { RoomType } from '@/interface';
 
@@ -69,12 +70,7 @@ const BookingPage = async ({ params, searchParams }: BookingPageProps) => {
               <h3>총 합계</h3>
               <div className="text-sm mt-1 text-gray-800">{Number(totalAmount).toLocaleString()} 원</div>
             </div>
-            <button
-              type="button"
-              className="w-full bg-rose-600 hover:bg-rose-500 px-6 py-3 text-white rounded-md"
-            >
-              확인 및 결제
-            </button>
+            <SubmitButton />
           </div>
         </div>
       </div>

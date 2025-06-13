@@ -1,6 +1,9 @@
+import 'dayjs/locale/ko';
+
+import dayjs from 'dayjs';
 import { useAtom, useAtomValue } from 'jotai';
 import { useRouter } from 'next/navigation';
-import type { ChangeEvent } from 'react';
+import { type ChangeEvent, useEffect } from 'react';
 
 import { filterValueAtom } from '@/atoms/filterAtoms';
 import { calculatorFilterState } from '@/atoms/selector';
@@ -19,6 +22,12 @@ const useBookingSection = (data: RoomType) => {
       [keyword]: e.target instanceof HTMLInputElement ? e.target.value : Number(e.target.value),
     }));
   };
+
+  useEffect(() => {
+    if (!filterValue.checkIn) {
+      setFilterValue((prevState) => ({ ...prevState, checkIn: dayjs().format('YYYY-MM-DD') }));
+    }
+  }, [filterValue.checkIn, setFilterValue]);
 
   const calculatedFilter = useAtomValue(calculatorFilterState);
 

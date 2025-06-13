@@ -65,6 +65,7 @@ export type UserType = {
   phone?: string;
   address?: string;
   comments?: CommentType[];
+  bookings?: BookingType[];
 };
 
 export type FormEditProfileType = {
@@ -97,4 +98,20 @@ export type FilterValueType = {
 
 export type ParamsProps = {
   params: { id: string };
+};
+
+export type BookingType = {
+  id: number;
+  userId: number;
+  roomId: string;
+  checkIn: string;
+  checkOut: string;
+  guestCount: number;
+  totalAmount: number;
+  totalDays: number;
+  status: 'SUCCESS' | 'CANCEL';
+  room: RoomType;
+  user: UserType;
+  createdAt: string;
+  updatedAt: string;
 };
