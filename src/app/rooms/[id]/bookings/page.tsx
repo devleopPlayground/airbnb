@@ -70,7 +70,7 @@ const BookingPage = async ({ params, searchParams }: BookingPageProps) => {
               <h3>총 합계</h3>
               <div className="text-sm mt-1 text-gray-800">{Number(totalAmount).toLocaleString()} 원</div>
             </div>
-            <SubmitButton />
+            <SubmitButton title={data.title} />
           </div>
         </div>
       </div>

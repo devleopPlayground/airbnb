@@ -10,11 +10,12 @@ type BookingType = {
   guestCount: string;
   totalAmount: string;
   totalDays: string;
+  status: 'SUCCESS' | 'CANCEL' | 'PENDING' | 'FAILED';
 };
 
 type RefundType = {
   id: string;
-  status: 'SUCCESS' | 'CANCEL';
+  status: 'SUCCESS' | 'CANCEL' | 'PENDING' | 'FAILED';
 };
 
 export async function GET(req: Request) {
@@ -28,7 +29,7 @@ export async function GET(req: Request) {
   if (id) {
     const booking = await prisma.booking.findFirst({
       where: {
-        id: id ? Number(id) : {},
+        id: id ? id : {},
       },
       include: {
         user: true,
@@ -42,6 +43,9 @@ export async function GET(req: Request) {
     const totalCount = await prisma.booking.count({
       where: {
         userId,
+        NOT: {
+          status: 'PENDING',
+        },
       },
     });
 
@@ -76,7 +80,7 @@ export async function POST(req: Request) {
 
   const formData = await req.json();
 
-  const { roomId, checkIn, checkOut, guestCount, totalAmount, totalDays }: BookingType = formData;
+  const { roomId, checkIn, checkOut, guestCount, totalAmount, totalDays, status }: BookingType = formData;
 
   const booking = await prisma.booking.create({
     data: {
@@ -87,7 +91,7 @@ export async function POST(req: Request) {
       guestCount: Number(guestCount),
       totalDays: Number(totalDays),
       totalAmount: Number(totalAmount),
-      status: 'SUCCESS',
+      status,
     },
   });
 
@@ -105,7 +109,7 @@ export async function PUT(req: Request) {
 
   const result = await prisma.booking.update({
     where: {
-      id: Number(id),
+      id: id,
     },
     data: {
       status,

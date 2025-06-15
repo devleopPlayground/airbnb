@@ -1,5 +1,5 @@
 {
-  "cSpell.words": ["autoincrement", "CHECKIN", "Kakao", "pretendard", "singin"],
+  "cSpell.words": ["autoincrement", "BRANDPAY", "CHECKIN", "Kakao", "pretendard", "singin", "tosspayments"],
   "[javascript, typescript]": {
     "editor.formatOnSave": true
   },

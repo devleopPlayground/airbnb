@@ -124,7 +124,7 @@ model Faq {
 }
 
 model Booking {
-  id             Int         @id @default(autoincrement())
+  id             String         @id @default(uuid())
   checkIn        DateTime
   checkOut       DateTime
   guestCount     Int
@@ -137,9 +137,53 @@ model Booking {
   createdAt      DateTime    @default(now())
   updatedAt      DateTime    @default(now())
   status         BookingStatus
+  payments       Payment[]
 } 
 
 enum BookingStatus {
   SUCCESS
-  CANCEL  
+  CANCEL
+  PENDING
+  FAILED
+}
+
+model Payment {
+  id               String             @id @default(uuid())
+  bookingId        String
+  paymentKey       String?  // 결제의 키 값
+  booking          Booking            @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  amount           Int
+  type             PaymentType?
+  orderId          String             @unique
+  orderName        String?
+  mId              String?
+  method           String?
+  status           PaymentStatusType?
+  cardNumber       String?
+  cardType         String?
+  receiptUrl       String?
+  checkoutUrl      String?
+  failureCode      String?
+  failureMessage   String?
+  approvedAt       DateTime?
+  requestedAt      DateTime?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @default(now())
+}
+
+enum PaymentType {
+  NORMAL
+  BILLING
+  BRANDPAY
+}
+
+enum PaymentStatusType {
+  READY
+  IN_PROGRESS
+  WAITING_FOR_DEPOSIT
+  DONE
+  CANCELED
+  PARTIAL_CANCELED
+  ABORTED
+  EXPIRED
 }

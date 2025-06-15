@@ -1,14 +1,16 @@
 'use client';
 
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 import toast from 'react-hot-toast';
 
 import { api } from '@/apis/httpClient';
 
-const SubmitButton = () => {
+const SubmitButton = ({ title }: { title: string }) => {
   const searchParams = useSearchParams();
   const params = useParams();
   const router = useRouter();
+  const { data: session } = useSession();
 
   const id = params?.id;
   const checkIn = searchParams.get('checkIn');
@@ -25,12 +27,15 @@ const SubmitButton = () => {
       guestCount,
       totalAmount,
       totalDays,
+      status: 'PENDING',
     });
 
     if (response.status == 200) {
       toast.success('예약을 완료했습니다.');
 
-      router.replace(`/users/bookings/${response.data.id}`);
+      router.replace(
+        `/payments?customerKey=${session?.user?.id}&roomTitle=${title}&checkIn=${checkIn}&checkOut=${checkOut}&guestCount=${guestCount}&totalAmount=${totalAmount}&totalDays=${totalDays}&bookingId=${response?.data.id}`,
+      );
     } else {
       toast.error('다시 시도해주세요.');
     }
